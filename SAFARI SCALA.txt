@@ -1,0 +1,102 @@
+CONSTRUCTORS
+============================
+Ancillary constructor looks like methods named this
+
+Primary constructors are designed for all information up front
+
+call another constructor by invoking this(....)
+
+
+class Employee(val firstName:String,val lastName:String,val title:String) {
+  //def this(firstName:String,lastName:String)=this(firstName,lastName,"programmer")
+  
+  /*def this(firstName:String,lastName:String)={
+     //println("in constructor")
+    this(firstName,lastName,"programmer")  //this should be first line
+    println("in constructor")
+  }*/
+  
+  // without equals
+def this(firstName:String,lastName:String){
+  this(firstName,lastName,"programmer")  
+}
+  
+}
+
+
+object Employeeobj  extends App{
+  val ada=new Employee("Ada","Loveplace")
+  println(ada.firstName)
+  println(ada.title)
+}
+
+CONSTRUCTOR NAMED AND DEFAULT ARGUMENTS
+===================================================
+Default arguments specify default values in the constructor declaration
+
+Named arguments allow calls by constructor parameter name 
+
+val dennis=new Employee(lastName="ritche",firstName="Dennis")
+  println(s"the first name is ${dennis.firstName}")
+  println(s"the lastname is ${dennis.lastName}")
+  
+METHODS IN CLASSES
+=========================================
+
+in class
+---------------------
+def  fullname= s"$firstName $lastName"
+
+in object
+--------------------
+println(ada.fullname)
+  println(dennis.fullname)
+  
+PRECONDITIONS,EXCEPTIONS,AND EXCEPTION HANDLING
+====================================================================
+All exceptions in scala are run time exceptions
+
+'require(boolean,"message")'  require is a method which checks for quality of parameters in a method or constructor
+
+require will throw an illegalArgumentException
+
+try and catch uses patternmatching to deetermine if a particular exception is thrown
+
+exceptions are thrown with the keyword throw and an exception object
+
+in class
+---------------------
+ require(firstName.nonEmpty,"First name can not be empty")
+ require(lastName.nonEmpty,"Last name can not be empty")
+ require(title.nonEmpty,"can not be empty")
+ 
+ if(title.contains("senior")||title.contains("junior"))
+   throw new IllegalArgumentException("title can not contain junior or senior")
+
+
+in object
+--------------------
+ try{
+  new Employee("bomo","","singer")
+  }
+  catch {
+    case iae:IllegalArgumentException => println(iae.getMessage)
+  }
+  finally{
+    println("continuing with our program")
+  }
+  
+  try{
+  new Employee("sam","akash","senior c programmer")
+  }
+  catch {
+    case iae:IllegalArgumentException => println(iae.getMessage)
+  }
+  finally{
+    println("continuing with our program")
+  }
+  
+  
+SUBCLASSING
+============================================================
+  
