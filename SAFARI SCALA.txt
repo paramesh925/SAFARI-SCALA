@@ -99,4 +99,47 @@ in object
   
 SUBCLASSING
 ============================================================
+Extends is a keyword used to subclass a class from another class
+Attributes belonging to super class are sent to the super clas constructor
+All subclasses are polymorphic, by assignment or method call
+You can have multiple classes in one file  
+
+After closing employee class
+-------------------------------------------
+
+ case class Department(val name:String)
+ 
+ class Manager(firstName:String,lastName:String,title:String,val department:Department) extends Employee(firstName,lastName,title)
+ 
+ in object
+ ------------------------
+ val math=new Department("maths1a") 
+ val alan=new Manager("alan","turing","mathamaticain",math)
+
+  println(alan.department.name)
   
+  val alanEmployee:Employee=alan
+  println(alanEmployee.firstName)
+ // println(alanEmployee.department)   department isapplicable to only manager so error
+  
+  def extractFirstName(e:Employee)=e.firstName
+  println(extractFirstName(alan))
+  
+OVERRIDING METHODS
+================================================== 
+override keyword is mandatory
+Overriden methods must lookthe same asthe superclass method it is overriding
+Overriden methods are created to change the implementation of the superclass's methods
+
+case class Department(val name:String)
+ 
+ class Manager(firstName:String,lastName:String,title:String,val department:Department) extends Employee(firstName,lastName,title){
+  override def fullname =s"$firstName $lastName,${department.name} manager" 
+}
+
+def extractFirstName(e:Employee)=e.firstName
+  println(extractFirstName(alan))
+ 
+println(alan.fullname)    //alan turing,maths1a manager
+
+println(alanEmployee.fullname) //alan turing,maths1a manager
